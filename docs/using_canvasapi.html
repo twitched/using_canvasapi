@@ -20,69 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -124,14 +61,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body class="floating">
 
 <div id="quarto-search-results"></div>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-canvas-api" id="toc-the-canvas-api" class="nav-link active" data-scroll-target="#the-canvas-api"><span class="toc-section-number">1</span>  The Canvas API</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="toc-section-number">2</span>  Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#getting-an-access-token" id="toc-getting-an-access-token" class="nav-link" data-scroll-target="#getting-an-access-token"><span class="toc-section-number">2.1</span>  Getting an Access Token</a></li>
+  <li><a href="#install-python" id="toc-install-python" class="nav-link" data-scroll-target="#install-python"><span class="toc-section-number">2.2</span>  Install Python</a></li>
+  <li><a href="#install-needed-packages" id="toc-install-needed-packages" class="nav-link" data-scroll-target="#install-needed-packages"><span class="toc-section-number">2.3</span>  Install Needed Packages</a></li>
+  <li><a href="#store-your-api-token-securely" id="toc-store-your-api-token-securely" class="nav-link" data-scroll-target="#store-your-api-token-securely"><span class="toc-section-number">2.4</span>  Store your API token securely</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -151,15 +105,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="the-canvas-api" class="level2">
-<h2 class="anchored" data-anchor-id="the-canvas-api">The Canvas API</h2>
-<p>One important feature of Canvas is its API. In fact, the Canvas LMS as we use it is built on its API. Everything a user does in either Canvas’ web interface or the mobile apps goes through the API. This architecture allows every user to use the API to do anything they could do in the browser or mobile app plus more in a program.</p>
+<section id="the-canvas-api" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-canvas-api"><span class="header-section-number">1</span> The Canvas API</h2>
+<p>One important feature of Canvas is its <a href="https://canvas.instructure.com/doc/api/">API</a>. In fact, the Canvas LMS as we use it is built on its API. Everything a user does in either Canvas’ web interface or the mobile apps goes through the API. This architecture allows every user to use the API to do anything they could do in the browser or mobile app plus more in a program.</p>
 <p>This guide shows how to use Python and a library created by the University of Central Florida to create scripts that use the API.</p>
 </section>
-<section id="getting-an-access-token" class="level2">
-<h2 class="anchored" data-anchor-id="getting-an-access-token">Getting an Access Token</h2>
+<section id="getting-started" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">2</span> Getting Started</h2>
+<section id="getting-an-access-token" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="getting-an-access-token"><span class="header-section-number">2.1</span> Getting an Access Token</h3>
 <p>To get direct access to the API you need an access token that acts like a password. You can get the key from your user. As shown below, go to your users settings and click on <code>New Access Token</code>.</p>
-<div class="quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-left">
 <figure class="figure">
 <p><img src="images/get_token.png" class="img-fluid figure-img"></p>
 <p></p><figcaption class="figure-caption">Getting an access token</figcaption><p></p>
@@ -182,20 +138,65 @@ Warning
 </div>
 <p>Copy the token to a safe place like a password manager or a temporary document on your desktop so that you can delete it later. As the dialog says, it will only show it one time. If you close the dialog before copying the token or copy it incorrectly. Delete that token (🗑) and create another.</p>
 </section>
-<section id="install-python" class="level2">
-<h2 class="anchored" data-anchor-id="install-python">Install Python</h2>
-<p>If you already have Python 3.9 or greater installed, and you can run python from the command line, you can skip this section. If not, do the following:</p>
+<section id="install-python" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="install-python"><span class="header-section-number">2.2</span> Install Python</h3>
+<p>If you already have Python 3.9 or greater installed, and you can run python from the command line, you can skip this section.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>These instructions are for Windows. If you are using MacOS or Linux, I suggest using your favorite package manager (like <code>brew</code> for MacOS) to install Python.</p>
+</div>
+</div>
+<p>If not, do the following:</p>
 <ul>
-<li>Go to <a href="https://python.org" class="uri">https://python.org</a> and</li>
+<li>Go to <a href="https://python.org" class="uri">https://python.org</a>, go to Downloads and choose to download the <code>Latest Python 3 Release</code>. At the time of this writing, the latest is 3.10.8. It might be higher now.</li>
+<li>Double click on the installer file to start the install</li>
+<li><strong>Check the box that says <code>Add python.exe to PATH</code></strong></li>
+<li>Choose <code>Install Now</code> to complete the rest of the install</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
+<p>Check to see if it worked by</p>
+<ul>
+<li><strong>Right</strong>-clicking on the start menu button and choosing <code>Windows PowerShell</code></li>
+<li>At the prompt type <code>python --version</code> and press enter</li>
+</ul>
+<p>It should show the version of python. This shows that you installed correctly. If it doesn’t work, uninstall python and reinstall it making sure you follow the instructions above.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Since we will be doing a lot on the command line I suggest installing and using <a href="https://www.microsoft.com/store/productId/9N0DX20HK701">the Windows Terminal</a>. It does a lot of things better than the standard command line through Powershell or cmd.</p>
+</div>
+</div>
+</section>
+<section id="install-needed-packages" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="install-needed-packages"><span class="header-section-number">2.3</span> Install Needed Packages</h3>
+<p>Now that Python is installed and we can run it from the command line, we are ready to install the Python packages we need to use the Canvas API.</p>
+<ul>
+<li>Open the command line (either Windows Terminal, if you installed it, or Windows PowerShell)</li>
+<li>Enter the following:</li>
+</ul>
+<pre class="{powershell}"><code>pip install canvasapi keyring</code></pre>
+</section>
+<section id="store-your-api-token-securely" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="store-your-api-token-securely"><span class="header-section-number">2.4</span> Store your API token securely</h3>
+<p>We can use the <code>keyring</code> package we just installed to store your Canvas API token securely and where we can retrieve it later:</p>
+<pre class="{powershell}"><code>keyring set canvas token</code></pre>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -295,6 +296,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return popup.innerHTML;
     });
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
 });
 </script>
 </div> <!-- /content -->
