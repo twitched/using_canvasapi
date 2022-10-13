@@ -1,5 +1,7 @@
 project:
   title: "using_canvasapi"
+  type: website
+  output-dir: docs
 
 editor: visual
 
