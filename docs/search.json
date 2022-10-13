@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "using_canvasapi.html",
+    "href": "using_canvasapi.html",
+    "title": "Using the Canvas API",
+    "section": "",
+    "text": "One important feature of Canvas is its API. In fact, the Canvas LMS as we use it is built on its API. Everything a user does in either Canvas’ web interface or the mobile apps goes through the API. This architecture allows every user to use the API to do anything they could do in the browser or mobile app plus more in a program.\nThis guide shows how to use Python and a library created by the University of Central Florida to create scripts that use the API."
+  },
+  {
+    "objectID": "using_canvasapi.html#getting-an-access-token",
+    "href": "using_canvasapi.html#getting-an-access-token",
+    "title": "Using the Canvas API",
+    "section": "Getting an Access Token",
+    "text": "Getting an Access Token\nTo get direct access to the API you need an access token that acts like a password. You can get the key from your user. As shown below, go to your users settings and click on New Access Token.\n\n\n\nGetting an access token\n\n\nThe Purpose field can have anything you want, but it is good to choose something that will help you remember why you created it. If you are doing this for learning, I suggest “Learning the Canvas API”.\nExpiration: You should have your token expire in case you don’t use it again. If you are doing this for learning, have the token expire soon. You can create another at anytime. You can create more than one at a time if you want.\n\n\n\n\n\n\nWarning\n\n\n\nThis access token is just as good as your username and password. Plus, it doesn’t require Duo! Treat it with extreme caution. Anyone with it can log into Canvas as you.\n\n\nCopy the token to a safe place like a password manager or a temporary document on your desktop so that you can delete it later. As the dialog says, it will only show it one time. If you close the dialog before copying the token or copy it incorrectly. Delete that token (🗑) and create another."
+  },
+  {
+    "objectID": "using_canvasapi.html#install-python",
+    "href": "using_canvasapi.html#install-python",
+    "title": "Using the Canvas API",
+    "section": "Install Python",
+    "text": "Install Python\nIf you already have Python 3.9 or greater installed, and you can run python from the command line, you can skip this section. If not, do the following:\n\nGo to https://python.org and\n\n\n1 + 1\n\n[1] 2"
+  }
+]
