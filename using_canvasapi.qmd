@@ -1,18 +1,20 @@
 ---
 title: "Using the Canvas API"
+author: "Doug Twitchell"
 format:
   html:
-    theme: lux
+    engine: knitr
+    theme: slate
     toc: true
-    toc-location: left
-    number-sections: true
-    number-depth: 3
+    toc-title: Contents
+    number-sections: false
     anchor-sections: true
     code-overflow: wrap
-    code-copy: true
+    code-copy: hover
+    code-block-bg: true
+    code-block-border-left: true
     fig-align: left
     link-external-newwindow: true
-    smooth-scroll: false
     execute:
       eval: false
 ---
@@ -74,7 +76,7 @@ Now that Python is installed and we can run it from the command line, we are rea
 -   Open the command line (either Windows Terminal, if you installed it, or Windows PowerShell)
 -   Enter the following:
 
-```{powershell}
+```powershell
 pip install canvasapi keyring
 ```
 
@@ -82,6 +84,101 @@ pip install canvasapi keyring
 
 We can use the `keyring` package we just installed to store your Canvas API token securely and where we can retrieve it later:
 
-```{powershell}
+```powershell
 keyring set canvas token
 ```
+
+It will then ask you for your "password", which is the token you copied from canvas earlier.  You will need to paste it here.
+
+To check to see if it worked, issue the command with a "get" in place of the "set":
+
+```powershell
+keyring get canvas token
+```
+
+### Have a Text Editor Ready
+
+You'll need a text editor for writing your code Windows' Notepad won't work.  If you don't already have one installed, I suggest [Notepad++](https://notepad-plus-plus.org).  
+
+## Canvas API Hello World
+
+Let's do some interacting with the Canvas API. Open your editor and copy and paste the following code:
+
+```python
+import keyring
+from canvasapi import Canvas
+
+############ Variables ################
+course_id = '12017' #Change this to your course id
+canvas_url = 'https://boisestatecanvas.instructure.com'
+########################################
+
+def main():
+    # Get your Canvas API Token from the keyring
+    token = keyring.get_password('canvas', 'token')
+    # Get a canvas object
+    canvas = Canvas(canvas_url, token)
+    # Get a canvas object
+    canvas = Canvas(canvas_url, token)
+    # Get the course you are interested in
+    course = canvas.get_course(course_id)
+	
+    ##### Here's where we do whatever we want with our course #####
+	
+    # let's list all the assignments
+    # see https://canvasapi.readthedocs.io/en/stable/course-ref.html#canvasapi.course.Course.get_assignments
+    # and see https://canvasapi.readthedocs.io/en/stable/examples.html#assignments
+    assignments = course.get_assignments()
+    for assignment in assignments:
+        print(f'{assignment.name}, {assignment.due_at}')
+
+if __name__ == '__main__':
+    main()
+```
+
+Change the `course_id` variable to one of your courses.  The number is in the Canvas URL.  For example if the URL for your course is `https://boisestatecanvas.instructure.com/courses/12017`, then the course id is **12017**.
+
+You can now play with the API.  
+
+The API documentation for the python interface created by the University of Central Florida can be found here: <https://canvasapi.readthedocs.io>.  
+
+The Canvas REST API documentation, where you can find all of the variable names is here: <https://canvas.instructure.com/doc/api/>
+
+## How to use my scripts
+
+I have already created a bunch of scripts ([here's the github repository](https://github.com/twitched/dt-canvas-utils)).  Unfortunately I didn't make them as easy to use as the script above. There are two ways you can use them
+
+1.   Download and use them as they are
+2.   Copy and paste code from my scripts
+
+### Download and use my scripts
+
+1.  [Donwload the scripts as a zip file](https://github.com/twitched/dt-canvas-utils/archive/refs/heads/main.zip)
+2.  Unzip them into an appropriate folder
+3.  Enter the canvas url into the keyring
+
+```powershell
+keyring set canvas url https://boisestatecanvas.instructure.com
+```
+4.  Inside the directory where you unzipped the scripts you can run them like this:
+
+```powershell
+python list_my_courses.py
+```
+This will give you command-line options you can use with the script
+
+### Copy and Paste
+
+You can also look at the code for my scripts and copy and paste the code in place of everything below `##### Here's where we do whatever we want with our course #####`.  This takes some understanding of what my code is doing since you will have to replace variables I obtain from the command line with your own variable or value.
+
+## Other Canvas API Interfaces
+
+You might wonder if there are Canvas API interfaces in your own favorite language. Here are a few:
+
+-   R: [rcanvas](https://github.com/daranzolin/rcanvas)
+-   Node.js: [node-canvas-api](https://github.com/ubc/node-canvas-api)
+-   Java: [canvas-api](https://github.com/kstateome/canvas-api)
+-   Ruby: [lms_api])(https://github.com/atomicjolt/lms_api)
+
+Finally, [James Jones](https://community.canvaslms.com/t5/user/viewprofilepage/user-id/105160) is very active in using the API and using javascript browser plugins to make canvas work easier.  Here's a [list of some of his work](https://community.canvaslms.com/t5/Higher-Ed-Canvas-Users/Canvancements-Canvas-Enhancements/ba-p/246997).  A repository of even more scripts he's made can be found here: <https://github.com/jamesjonesmath/canvancement>
+

@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Doug Twitchell">
 
 <title>Using the Canvas API</title>
 <style>
@@ -20,6 +21,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -61,30 +125,36 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="floating">
+<body>
 
 <div id="quarto-search-results"></div>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#the-canvas-api" id="toc-the-canvas-api" class="nav-link active" data-scroll-target="#the-canvas-api"><span class="toc-section-number">1</span>  The Canvas API</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="toc-section-number">2</span>  Getting Started</a>
-  <ul class="collapse">
-  <li><a href="#getting-an-access-token" id="toc-getting-an-access-token" class="nav-link" data-scroll-target="#getting-an-access-token"><span class="toc-section-number">2.1</span>  Getting an Access Token</a></li>
-  <li><a href="#install-python" id="toc-install-python" class="nav-link" data-scroll-target="#install-python"><span class="toc-section-number">2.2</span>  Install Python</a></li>
-  <li><a href="#install-needed-packages" id="toc-install-needed-packages" class="nav-link" data-scroll-target="#install-needed-packages"><span class="toc-section-number">2.3</span>  Install Needed Packages</a></li>
-  <li><a href="#store-your-api-token-securely" id="toc-store-your-api-token-securely" class="nav-link" data-scroll-target="#store-your-api-token-securely"><span class="toc-section-number">2.4</span>  Store your API token securely</a></li>
-  </ul></li>
-  </ul>
-</nav>
-</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contents</h2>
+   
+  <ul>
+  <li><a href="#the-canvas-api" id="toc-the-canvas-api" class="nav-link active" data-scroll-target="#the-canvas-api">The Canvas API</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#getting-an-access-token" id="toc-getting-an-access-token" class="nav-link" data-scroll-target="#getting-an-access-token">Getting an Access Token</a></li>
+  <li><a href="#install-python" id="toc-install-python" class="nav-link" data-scroll-target="#install-python">Install Python</a></li>
+  <li><a href="#install-needed-packages" id="toc-install-needed-packages" class="nav-link" data-scroll-target="#install-needed-packages">Install Needed Packages</a></li>
+  <li><a href="#store-your-api-token-securely" id="toc-store-your-api-token-securely" class="nav-link" data-scroll-target="#store-your-api-token-securely">Store your API token securely</a></li>
+  <li><a href="#have-a-text-editor-ready" id="toc-have-a-text-editor-ready" class="nav-link" data-scroll-target="#have-a-text-editor-ready">Have a Text Editor Ready</a></li>
+  </ul></li>
+  <li><a href="#canvas-api-hello-world" id="toc-canvas-api-hello-world" class="nav-link" data-scroll-target="#canvas-api-hello-world">Canvas API Hello World</a></li>
+  <li><a href="#how-to-use-my-scripts" id="toc-how-to-use-my-scripts" class="nav-link" data-scroll-target="#how-to-use-my-scripts">How to use my scripts</a>
+  <ul class="collapse">
+  <li><a href="#download-and-use-my-scripts" id="toc-download-and-use-my-scripts" class="nav-link" data-scroll-target="#download-and-use-my-scripts">Download and use my scripts</a></li>
+  <li><a href="#copy-and-paste" id="toc-copy-and-paste" class="nav-link" data-scroll-target="#copy-and-paste">Copy and Paste</a></li>
+  </ul></li>
+  <li><a href="#other-canvas-api-interfaces" id="toc-other-canvas-api-interfaces" class="nav-link" data-scroll-target="#other-canvas-api-interfaces">Other Canvas API Interfaces</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -98,6 +168,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Doug Twitchell </p>
+          </div>
+  </div>
     
     
   </div>
@@ -105,15 +181,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="the-canvas-api" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="the-canvas-api"><span class="header-section-number">1</span> The Canvas API</h2>
+<section id="the-canvas-api" class="level2">
+<h2 class="anchored" data-anchor-id="the-canvas-api">The Canvas API</h2>
 <p>One important feature of Canvas is its <a href="https://canvas.instructure.com/doc/api/">API</a>. In fact, the Canvas LMS as we use it is built on its API. Everything a user does in either Canvas’ web interface or the mobile apps goes through the API. This architecture allows every user to use the API to do anything they could do in the browser or mobile app plus more in a program.</p>
 <p>This guide shows how to use Python and a library created by the University of Central Florida to create scripts that use the API.</p>
 </section>
-<section id="getting-started" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">2</span> Getting Started</h2>
-<section id="getting-an-access-token" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="getting-an-access-token"><span class="header-section-number">2.1</span> Getting an Access Token</h3>
+<section id="getting-started" class="level2">
+<h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
+<section id="getting-an-access-token" class="level3">
+<h3 class="anchored" data-anchor-id="getting-an-access-token">Getting an Access Token</h3>
 <p>To get direct access to the API you need an access token that acts like a password. You can get the key from your user. As shown below, go to your users settings and click on <code>New Access Token</code>.</p>
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
@@ -138,8 +214,8 @@ Warning
 </div>
 <p>Copy the token to a safe place like a password manager or a temporary document on your desktop so that you can delete it later. As the dialog says, it will only show it one time. If you close the dialog before copying the token or copy it incorrectly. Delete that token (🗑) and create another.</p>
 </section>
-<section id="install-python" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="install-python"><span class="header-section-number">2.2</span> Install Python</h3>
+<section id="install-python" class="level3">
+<h3 class="anchored" data-anchor-id="install-python">Install Python</h3>
 <p>If you already have Python 3.9 or greater installed, and you can run python from the command line, you can skip this section.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -181,22 +257,103 @@ Note
 </div>
 </div>
 </section>
-<section id="install-needed-packages" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="install-needed-packages"><span class="header-section-number">2.3</span> Install Needed Packages</h3>
+<section id="install-needed-packages" class="level3">
+<h3 class="anchored" data-anchor-id="install-needed-packages">Install Needed Packages</h3>
 <p>Now that Python is installed and we can run it from the command line, we are ready to install the Python packages we need to use the Canvas API.</p>
 <ul>
 <li>Open the command line (either Windows Terminal, if you installed it, or Windows PowerShell)</li>
 <li>Enter the following:</li>
 </ul>
-<pre class="{powershell}"><code>pip install canvasapi keyring</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pip install canvasapi keyring</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="store-your-api-token-securely" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="store-your-api-token-securely"><span class="header-section-number">2.4</span> Store your API token securely</h3>
+<section id="store-your-api-token-securely" class="level3">
+<h3 class="anchored" data-anchor-id="store-your-api-token-securely">Store your API token securely</h3>
 <p>We can use the <code>keyring</code> package we just installed to store your Canvas API token securely and where we can retrieve it later:</p>
-<pre class="{powershell}"><code>keyring set canvas token</code></pre>
-
-
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>keyring <span class="fu">set</span> canvas token</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It will then ask you for your “password”, which is the token you copied from canvas earlier. You will need to paste it here.</p>
+<p>To check to see if it worked, issue the command with a “get” in place of the “set”:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>keyring get canvas token</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
+<section id="have-a-text-editor-ready" class="level3">
+<h3 class="anchored" data-anchor-id="have-a-text-editor-ready">Have a Text Editor Ready</h3>
+<p>You’ll need a text editor for writing your code Windows’ Notepad won’t work. If you don’t already have one installed, I suggest <a href="https://notepad-plus-plus.org">Notepad++</a>.</p>
+</section>
+</section>
+<section id="canvas-api-hello-world" class="level2">
+<h2 class="anchored" data-anchor-id="canvas-api-hello-world">Canvas API Hello World</h2>
+<p>Let’s do some interacting with the Canvas API. Open your editor and copy and paste the following code:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> keyring</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> canvasapi <span class="im">import</span> Canvas</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">############ Variables ################</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>course_id <span class="op">=</span> <span class="st">'12017'</span> <span class="co">#Change this to your course id</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>canvas_url <span class="op">=</span> <span class="st">'https://boisestatecanvas.instructure.com'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">########################################</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get your Canvas API Token from the keyring</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> keyring.get_password(<span class="st">'canvas'</span>, <span class="st">'token'</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get a canvas object</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    canvas <span class="op">=</span> Canvas(canvas_url, token)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get a canvas object</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    canvas <span class="op">=</span> Canvas(canvas_url, token)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get the course you are interested in</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    course <span class="op">=</span> canvas.get_course(course_id)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">##### Here's where we do whatever we want with our course #####</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># let's list all the assignments</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># see https://canvasapi.readthedocs.io/en/stable/course-ref.html#canvasapi.course.Course.get_assignments</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and see https://canvasapi.readthedocs.io/en/stable/examples.html#assignments</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    assignments <span class="op">=</span> course.get_assignments()</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> assignment <span class="kw">in</span> assignments:</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f'</span><span class="sc">{</span>assignment<span class="sc">.</span>name<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>assignment<span class="sc">.</span>due_at<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">'__main__'</span>:</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    main()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Change the <code>course_id</code> variable to one of your courses. The number is in the Canvas URL. For example if the URL for your course is <code>https://boisestatecanvas.instructure.com/courses/12017</code>, then the course id is <strong>12017</strong>.</p>
+<p>You can now play with the API.</p>
+<p>The API documentation for the python interface created by the University of Central Florida can be found here: <a href="https://canvasapi.readthedocs.io" class="uri">https://canvasapi.readthedocs.io</a>.</p>
+<p>The Canvas REST API documentation, where you can find all of the variable names is here: <a href="https://canvas.instructure.com/doc/api/" class="uri">https://canvas.instructure.com/doc/api/</a></p>
+</section>
+<section id="how-to-use-my-scripts" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-use-my-scripts">How to use my scripts</h2>
+<p>I have already created a bunch of scripts (<a href="https://github.com/twitched/dt-canvas-utils">here’s the github repository</a>). Unfortunately I didn’t make them as easy to use as the script above. There are two ways you can use them</p>
+<ol type="1">
+<li>Download and use them as they are</li>
+<li>Copy and paste code from my scripts</li>
+</ol>
+<section id="download-and-use-my-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="download-and-use-my-scripts">Download and use my scripts</h3>
+<ol type="1">
+<li><a href="https://github.com/twitched/dt-canvas-utils/archive/refs/heads/main.zip">Donwload the scripts as a zip file</a></li>
+<li>Unzip them into an appropriate folder</li>
+<li>Enter the canvas url into the keyring</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>keyring <span class="fu">set</span> canvas url https<span class="op">://</span>boisestatecanvas<span class="op">.</span><span class="fu">instructure</span><span class="op">.</span><span class="fu">com</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="4" type="1">
+<li>Inside the directory where you unzipped the scripts you can run them like this:</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>python list_my_courses<span class="op">.</span><span class="fu">py</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will give you command-line options you can use with the script</p>
+</section>
+<section id="copy-and-paste" class="level3">
+<h3 class="anchored" data-anchor-id="copy-and-paste">Copy and Paste</h3>
+<p>You can also look at the code for my scripts and copy and paste the code in place of everything below <code>##### Here's where we do whatever we want with our course #####</code>. This takes some understanding of what my code is doing since you will have to replace variables I obtain from the command line with your own variable or value.</p>
+</section>
+</section>
+<section id="other-canvas-api-interfaces" class="level2">
+<h2 class="anchored" data-anchor-id="other-canvas-api-interfaces">Other Canvas API Interfaces</h2>
+<p>You might wonder if there are Canvas API interfaces in your own favorite language. Here are a few:</p>
+<ul>
+<li>R: <a href="https://github.com/daranzolin/rcanvas">rcanvas</a></li>
+<li>Node.js: <a href="https://github.com/ubc/node-canvas-api">node-canvas-api</a></li>
+<li>Java: <a href="https://github.com/kstateome/canvas-api">canvas-api</a></li>
+<li>Ruby: [lms_api])(https://github.com/atomicjolt/lms_api)</li>
+</ul>
+<p>Finally, <a href="https://community.canvaslms.com/t5/user/viewprofilepage/user-id/105160">James Jones</a> is very active in using the API and using javascript browser plugins to make canvas work easier. Here’s a <a href="https://community.canvaslms.com/t5/Higher-Ed-Canvas-Users/Canvancements-Canvas-Enhancements/ba-p/246997">list of some of his work</a>. A repository of even more scripts he’s made can be found here: <a href="https://github.com/jamesjonesmath/canvancement" class="uri">https://github.com/jamesjonesmath/canvancement</a></p>
+
+
 </section>
 
 </main> <!-- /main -->
